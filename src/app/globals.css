@@ -1,0 +1,32 @@
+@import "./styles/reset.css";
+@import "./styles/utilities.css";
+
+:root {
+  /* colours */
+
+  /* Light theme */
+--col-v-light-grey: hsl(0, 0%, 98%)
+--col-v-light-grey-blue: hsl(236, 33%, 92%)
+--col-light-grey-blue: hsl(233, 11%, 84%)
+--col-dark-grey-blue: hsl(236, 9%, 61%)
+--col-v-dark-grey-blue: hsl(235, 19%, 35%)
+}
+
+
+body {
+    background-color: var(--col-v-light-grey);
+}
+
+button.circle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  border: 1px solid hsl(236, 33%, 92%);
+}
+
+.btn-gradient {
+  background: linear-gradient(to right bottom, hsl(192, 100%, 67%) , hsl(280, 87%, 65%));
+}

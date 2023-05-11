@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import styles from "./page.module.css";
+import Header from "@/components/Header/Header";
 import AddTodo from "@/components/AddTodo/AddTodo";
 import TodoList from "@/components/TodoList/TodoList";
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
+  // move these to TodoList.jsx and AddTodo.jsx
+  const [AddButtonClicked, setAddButtonClicked] = useState(false);
+  const [todoButtonClicked, setTodoButtonClicked] = useState(false);
 
   function handleAddTodo(todo) {
     setTodos([...todos, todo]);
@@ -17,11 +21,31 @@ export default function Home() {
     setTodos(newTodos);
   }
 
+  // move these to TodoList.jsx and AddTodo.jsx
+  function handleAddButtonClicked() {
+    setAddButtonClicked(!AddButtonClicked);
+  }
+
+  function handleTodoButtonClicked() {
+    setTodoButtonClicked(!todoButtonClicked);
+  }
+
   return (
-    <div>
-      <h1 className={styles.title}>Todo</h1>
-      <AddTodo addTodo={handleAddTodo} />
-      <TodoList todos={todos} deleteTodo={handleDeleteTodo} />
-    </div>
+    <>
+      <Header />
+      <main className="main-content container">
+        <AddTodo
+          addTodo={handleAddTodo}
+          buttonClicked={AddButtonClicked}
+          handleButtonClicked={handleAddButtonClicked}
+        />
+        <TodoList
+          todos={todos}
+          deleteTodo={handleDeleteTodo}
+          buttonClicked={todoButtonClicked}
+          handleButtonClicked={handleTodoButtonClicked}
+        />
+      </main>
+    </>
   );
 }

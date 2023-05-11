@@ -1,6 +1,8 @@
 import { useState } from "react";
-
-const AddTodo = ({ addTodo }) => {
+import "./AddTodo.scss";
+import Image from "next/image";
+import IconCheck from "/public/assets/images/icon-check.svg";
+const AddTodo = ({ addTodo, buttonClicked, handleButtonClicked }) => {
   const [inputTodo, setInputTodo] = useState("");
 
   function handleSubmit(e) {
@@ -12,11 +14,18 @@ const AddTodo = ({ addTodo }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="submit">Add</button>
+    <form className="flex" onSubmit={handleSubmit}>
+      <button
+        className={`btn circle-btn ${buttonClicked ? "btn-gradient" : ""}`}
+        type="submit"
+        onClick={handleButtonClicked}
+      >
+        <Image src={IconCheck} alt="add item" />
+      </button>
+
       <input
         type="text"
-        placeholder="Add a todo"
+        placeholder="Create a new todo"
         value={inputTodo}
         onChange={(e) => setInputTodo(e.target.value)}
       />

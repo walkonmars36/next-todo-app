@@ -1,0 +1,28 @@
+.todos {
+  margin-top: 0.5rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 5px;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid hsl(236, 33%, 92%);
+    padding: 0.5em;
+  }
+}
+
+.first-item {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.last-item {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom: none;
+}
+
+.icon-cross {
+  width: clamp(0.75rem, 0.618rem + 0.563vw, 1.125rem);
+  height: auto;
+}
