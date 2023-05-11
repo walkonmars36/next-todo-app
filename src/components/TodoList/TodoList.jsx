@@ -4,16 +4,23 @@ import Image from "next/image";
 import IconCheck from "/public/assets/images/icon-check.svg";
 import IconCross from "/public/assets/images/icon-cross.svg";
 
-const TodoList = ({ todos, todoCompleted, deleteTodo }) => {
-  const [todoButtonClicked, setTodoButtonClicked] = useState(false);
+const TodoList = ({ todos, filter, toggleCompleted, deleteTodo }) => {
+  const filteredTodos = todos.filter((todo, index) => {
+    if (filter === "all") {
+      return true;
+    } else if (filter === "active") {
+      return !todo.completed;
+    } else if (filter === "completed") {
+      return todo.completed;
+    }
+    return false;
+  });
 
-  function handleTodoButtonClicked() {
-    setTodoButtonClicked(!todoButtonClicked);
-  }
+  const activeTodosCount = todos.filter((todo) => !todo.completed).length;
 
   return (
     <ul className="todos" role="list">
-      {todos.map((todo, index) => (
+      {filteredTodos.map((todo, index) => (
         <li
           className={`todos__item ${index === 0 ? "first-item" : ""} ${
             todo.completed ? "todos__item--completed" : ""
@@ -21,12 +28,9 @@ const TodoList = ({ todos, todoCompleted, deleteTodo }) => {
           key={index}
         >
           <button
-            className={`btn circle-btn ${
-              todoButtonClicked ? "btn-gradient" : ""
-            }`}
-            onClick={(e) => {
-              handleTodoButtonClicked(e);
-              todoCompleted(index);
+            className={`btn circle-btn ${todo.completed ? "btn-gradient" : ""}`}
+            onClick={() => {
+              toggleCompleted(index);
             }}
           >
             <Image src={IconCheck} alt="check item" />
@@ -38,9 +42,17 @@ const TodoList = ({ todos, todoCompleted, deleteTodo }) => {
         </li>
       ))}
       {todos.length > 0 && (
-        <li className="todos__item todos__item-footer">
-          <p>{todos.length} item(s) left</p>
-          <span className="completed-text">Clear Completed</span>
+        <li className="todos__item todos__item--footer">
+          {activeTodosCount > 0 &&
+            (filter === "all" || filter === "active") && (
+              <span className="todos__count">
+                {activeTodosCount} item(s) left
+              </span>
+            )}
+
+          {todos.some((todo) => todo.completed) && filter !== "active" && (
+            <button className="btn todos__clear-btn">Clear Completed</button>
+          )}
         </li>
       )}
     </ul>

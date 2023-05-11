@@ -5,9 +5,11 @@ import styles from "./page.module.css";
 import Header from "@/components/Header/Header";
 import AddTodo from "@/components/AddTodo/AddTodo";
 import TodoList from "@/components/TodoList/TodoList";
+import TodoFilter from "@/components/TodoFilter/TodoFilter";
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
+  const [filter, setFilter] = useState("all");
 
   function handleAddTodo(todo) {
     setTodos([...todos, { text: todo, completed: false }]);
@@ -32,6 +34,10 @@ export default function Home() {
     setTodos(newTodos);
   }
 
+  function handleFilterChange(filter) {
+    setFilter(filter);
+  }
+
   return (
     <div className={styles.page}>
       <Header />
@@ -39,8 +45,13 @@ export default function Home() {
         <AddTodo addTodo={handleAddTodo} />
         <TodoList
           todos={todos}
-          todoCompleted={handleToggleTodoCompleted}
+          filter={filter}
+          toggleCompleted={handleToggleTodoCompleted}
           deleteTodo={handleDeleteTodo}
+        />
+        <TodoFilter
+          currentFilter={filter}
+          onFilterChange={handleFilterChange}
         />
       </main>
     </div>
