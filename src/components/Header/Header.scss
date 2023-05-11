@@ -4,4 +4,16 @@
   background-repeat: no-repeat;
   min-height: 12.5rem;
   background-position: center;
+
+  &__content {
+    padding-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    color: #fff;
+    letter-spacing: 0.3em;
+  }
 }

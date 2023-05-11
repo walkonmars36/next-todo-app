@@ -2,8 +2,10 @@ import { useState } from "react";
 import "./AddTodo.scss";
 import Image from "next/image";
 import IconCheck from "/public/assets/images/icon-check.svg";
-const AddTodo = ({ addTodo, buttonClicked, handleButtonClicked }) => {
+
+const AddTodo = ({ addTodo }) => {
   const [inputTodo, setInputTodo] = useState("");
+  const [AddButtonClicked, setAddButtonClicked] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -13,12 +15,16 @@ const AddTodo = ({ addTodo, buttonClicked, handleButtonClicked }) => {
     setInputTodo("");
   }
 
+  function handleAddButtonClicked() {
+    setAddButtonClicked(!AddButtonClicked);
+  }
+
   return (
     <form className="flex" onSubmit={handleSubmit}>
       <button
-        className={`btn circle-btn ${buttonClicked ? "btn-gradient" : ""}`}
+        className={`btn circle-btn ${AddButtonClicked ? "btn-gradient" : ""}`}
         type="submit"
-        onClick={handleButtonClicked}
+        onClick={handleAddButtonClicked}
       >
         <Image src={IconCheck} alt="add item" />
       </button>

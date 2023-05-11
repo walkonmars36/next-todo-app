@@ -1,0 +1,10 @@
+.page {
+  position: relative;
+}
+
+.mainContent {
+  position: absolute;
+  top: 6.8rem;
+  left: 0;
+  right: 0;
+}

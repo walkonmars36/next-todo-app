@@ -8,12 +8,23 @@ import TodoList from "@/components/TodoList/TodoList";
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
-  // move these to TodoList.jsx and AddTodo.jsx
-  const [AddButtonClicked, setAddButtonClicked] = useState(false);
-  const [todoButtonClicked, setTodoButtonClicked] = useState(false);
 
   function handleAddTodo(todo) {
-    setTodos([...todos, todo]);
+    setTodos([...todos, { text: todo, completed: false }]);
+  }
+
+  function handleToggleTodoCompleted(index) {
+    setTodos(
+      todos.map((todo, i) => {
+        if (i === index) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      })
+    );
   }
 
   function handleDeleteTodo(index) {
@@ -21,31 +32,17 @@ export default function Home() {
     setTodos(newTodos);
   }
 
-  // move these to TodoList.jsx and AddTodo.jsx
-  function handleAddButtonClicked() {
-    setAddButtonClicked(!AddButtonClicked);
-  }
-
-  function handleTodoButtonClicked() {
-    setTodoButtonClicked(!todoButtonClicked);
-  }
-
   return (
-    <>
+    <div className={styles.page}>
       <Header />
-      <main className="main-content container">
-        <AddTodo
-          addTodo={handleAddTodo}
-          buttonClicked={AddButtonClicked}
-          handleButtonClicked={handleAddButtonClicked}
-        />
+      <main className={`${styles.mainContent} container`}>
+        <AddTodo addTodo={handleAddTodo} />
         <TodoList
           todos={todos}
+          todoCompleted={handleToggleTodoCompleted}
           deleteTodo={handleDeleteTodo}
-          buttonClicked={todoButtonClicked}
-          handleButtonClicked={handleTodoButtonClicked}
         />
       </main>
-    </>
+    </div>
   );
 }
