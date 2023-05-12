@@ -1,5 +1,5 @@
 import "./TodoList.scss";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useState } from "react";
 import Image from "next/image";
 import IconCheck from "/public/assets/images/icon-check.svg";
@@ -7,6 +7,7 @@ import IconCross from "/public/assets/images/icon-cross.svg";
 
 const TodoList = ({
   todos,
+  setTodos,
   filter,
   toggleCompleted,
   deleteTodo,
@@ -32,9 +33,21 @@ const TodoList = ({
 
   const completedTodosCount = todos.filter((todo) => todo.completed).length;
 
+  function handleDragEnd(result) {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = [...todos];
+    const [reorderedItems] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItems);
+
+    setTodos(items);
+  }
+
   return (
     <>
-      <DragDropContext>
+      <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="todos">
           {(provided) => (
             <ul
@@ -44,35 +57,48 @@ const TodoList = ({
               ref={provided.innerRef}
             >
               {filteredTodos.map((todo, index) => (
-                <li
-                  className={`todos__item ${index === 0 ? "first-item" : ""} ${
-                    todo.completed ? "todos__item--completed" : ""
-                  } `}
+                <Draggable
                   key={index}
+                  draggableId={String(index)}
+                  index={index}
                 >
-                  <button
-                    className={`btn circle-btn ${
-                      todo.completed ? "gradient" : ""
-                    }`}
-                    onClick={() => {
-                      toggleCompleted(index);
-                    }}
-                  >
-                    <Image src={IconCheck} alt="check item" />
-                  </button>
-                  {todo.text}
-                  <button
-                    className="btn todos__item-delete"
-                    onClick={() => deleteTodo(index)}
-                  >
-                    <Image
-                      className="icon-cross"
-                      src={IconCross}
-                      alt="delete item"
-                    />
-                  </button>
-                </li>
+                  {(provided) => (
+                    <li
+                      className={`todos__item ${
+                        index === 0 ? "first-item" : ""
+                      } ${todo.completed ? "todos__item--completed" : ""} `}
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <button
+                        className={`btn circle-btn ${
+                          todo.completed ? "gradient" : ""
+                        }`}
+                        onClick={() => {
+                          toggleCompleted(index);
+                        }}
+                      >
+                        <Image src={IconCheck} alt="check item" />
+                      </button>
+                      {todo.text}
+                      <button
+                        className="btn todos__item-delete"
+                        onClick={() => deleteTodo(index)}
+                      >
+                        <Image
+                          className="icon-cross"
+                          src={IconCross}
+                          alt="delete item"
+                        />
+                      </button>
+                    </li>
+                  )}
+                </Draggable>
               ))}
+
+              {provided.placeholder}
+
               {showFooter && (
                 <li className="todos__item todos__item-footer">
                   {filter !== "completed" && (

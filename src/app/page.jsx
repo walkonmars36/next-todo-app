@@ -51,6 +51,7 @@ export default function Home() {
         <AddTodo addTodo={handleAddTodo} />
         <TodoList
           todos={todos}
+          setTodos={setTodos}
           filter={filter}
           toggleCompleted={handleToggleTodoCompleted}
           deleteTodo={handleDeleteTodo}
