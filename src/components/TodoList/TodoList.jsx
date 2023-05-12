@@ -4,7 +4,13 @@ import Image from "next/image";
 import IconCheck from "/public/assets/images/icon-check.svg";
 import IconCross from "/public/assets/images/icon-cross.svg";
 
-const TodoList = ({ todos, filter, toggleCompleted, deleteTodo }) => {
+const TodoList = ({
+  todos,
+  filter,
+  toggleCompleted,
+  deleteTodo,
+  clearCompleted,
+}) => {
   const filteredTodos = todos.filter((todo, index) => {
     if (filter === "all") {
       return true;
@@ -18,44 +24,65 @@ const TodoList = ({ todos, filter, toggleCompleted, deleteTodo }) => {
 
   const activeTodosCount = todos.filter((todo) => !todo.completed).length;
 
+  const showFooter =
+    (activeTodosCount > 0 && filter === "all") ||
+    filter === "active" ||
+    todos.some((todo) => todo.completed);
+
+  const completedTodosCount = todos.filter((todo) => todo.completed).length;
+
   return (
-    <ul className="todos" role="list">
-      {filteredTodos.map((todo, index) => (
-        <li
-          className={`todos__item ${index === 0 ? "first-item" : ""} ${
-            todo.completed ? "todos__item--completed" : ""
-          } `}
-          key={index}
-        >
-          <button
-            className={`btn circle-btn ${todo.completed ? "btn-gradient" : ""}`}
-            onClick={() => {
-              toggleCompleted(index);
-            }}
+    <>
+      <ul className="todos" role="list">
+        {filteredTodos.map((todo, index) => (
+          <li
+            className={`todos__item ${index === 0 ? "first-item" : ""} ${
+              todo.completed ? "todos__item--completed" : ""
+            } `}
+            key={index}
           >
-            <Image src={IconCheck} alt="check item" />
-          </button>
-          {todo.text}
-          <button className="btn" onClick={() => deleteTodo(index)}>
-            <Image className="icon-cross" src={IconCross} alt="delete item" />
-          </button>
-        </li>
-      ))}
-      {todos.length > 0 && (
-        <li className="todos__item todos__item--footer">
-          {activeTodosCount > 0 &&
-            (filter === "all" || filter === "active") && (
+            <button
+              className={`btn circle-btn ${todo.completed ? "gradient" : ""}`}
+              onClick={() => {
+                toggleCompleted(index);
+              }}
+            >
+              <Image src={IconCheck} alt="check item" />
+            </button>
+            {todo.text}
+            <button className="btn" onClick={() => deleteTodo(index)}>
+              <Image className="icon-cross" src={IconCross} alt="delete item" />
+            </button>
+          </li>
+        ))}
+        {showFooter && (
+          <li className="todos__item todos__item--footer">
+            {filter !== "completed" && (
               <span className="todos__count">
                 {activeTodosCount} item(s) left
               </span>
             )}
+            {filter === "completed" && (
+              <span className="todos__count">
+                {completedTodosCount} item(s) completed
+              </span>
+            )}
 
-          {todos.some((todo) => todo.completed) && filter !== "active" && (
-            <button className="btn todos__clear-btn">Clear Completed</button>
-          )}
-        </li>
+            {todos.some((todo) => todo.completed) && filter !== "active" && (
+              <button onClick={clearCompleted} className="btn todos__clear-btn">
+                Clear Completed
+              </button>
+            )}
+          </li>
+        )}
+      </ul>
+
+      {filter === "completed" && !todos.some((todo) => todo.completed) && (
+        <div className="no-completed-message">
+          Nothing completed yet, go and finish one of your tasks!
+        </div>
       )}
-    </ul>
+    </>
   );
 };
 

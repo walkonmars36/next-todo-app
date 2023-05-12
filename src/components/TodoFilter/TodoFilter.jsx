@@ -1,23 +1,29 @@
 import "./TodoFilter.scss";
 
-const TodoFilter = ({ currentFilter, onFilterChange }) => {
+const TodoFilter = ({ todos, currentFilter, onFilterChange }) => {
+  if (todos.length === 0) {
+    return null;
+  }
+
   return (
-    <div>
+    <div className="flex filters justify-center align-center">
       <button
         onClick={() => onFilterChange("all")}
-        className={currentFilter === "all" ? "filtered-todos" : ""}
+        className={`btn ${currentFilter === "all" ? "filtered-todos" : ""}`}
       >
         All
       </button>
       <button
         onClick={() => onFilterChange("active")}
-        className={currentFilter === "active" ? "filtered-todos" : ""}
+        className={`btn ${currentFilter === "active" ? "filtered-todos" : ""}`}
       >
         Active
       </button>
       <button
         onClick={() => onFilterChange("completed")}
-        className={currentFilter === "completed" ? "filtered-todos" : ""}
+        className={`btn ${
+          currentFilter === "completed" ? "filtered-todos" : ""
+        }`}
       >
         Completed
       </button>

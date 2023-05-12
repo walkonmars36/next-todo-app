@@ -22,7 +22,7 @@ const AddTodo = ({ addTodo }) => {
   return (
     <form className="flex" onSubmit={handleSubmit}>
       <button
-        className={`btn circle-btn ${AddButtonClicked ? "btn-gradient" : ""}`}
+        className={`btn circle-btn ${AddButtonClicked ? "gradient" : ""}`}
         type="submit"
         onClick={handleAddButtonClicked}
       >

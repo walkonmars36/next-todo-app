@@ -14,6 +14,18 @@
   gap: var(--gap, 1rem);
 }
 
+.justify-center {
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
 .uppercase {
   text-transform: uppercase;
 }

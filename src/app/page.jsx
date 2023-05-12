@@ -38,6 +38,12 @@ export default function Home() {
     setFilter(filter);
   }
 
+  function handleClearCompleted() {
+    const newTodos = todos.filter((todo) => !todo.completed);
+    setTodos(newTodos);
+    setFilter("all");
+  }
+
   return (
     <div className={styles.page}>
       <Header />
@@ -48,8 +54,10 @@ export default function Home() {
           filter={filter}
           toggleCompleted={handleToggleTodoCompleted}
           deleteTodo={handleDeleteTodo}
+          clearCompleted={handleClearCompleted}
         />
         <TodoFilter
+          todos={todos}
           currentFilter={filter}
           onFilterChange={handleFilterChange}
         />
