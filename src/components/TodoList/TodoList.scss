@@ -6,6 +6,7 @@
   &__item {
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
     border-bottom: 1px solid hsl(236, 33%, 92%);
     padding: 1em;
     background-color: #fff;
@@ -15,10 +16,18 @@
       color: hsl(233, 11%, 84%);
     }
 
+    &-delete {
+      margin-left: auto;
+    }
+
     &-footer {
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       border-bottom: none;
+
+      &-text {
+        color: var(--col-dark-grey-blue);
+      }
     }
   }
 }

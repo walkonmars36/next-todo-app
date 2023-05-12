@@ -5,6 +5,7 @@
 body {
   background-color: var(--col-v-light-grey);
   color: var(--primary-font-col);
+  font-weight: 400;
 }
 
 button.circle-btn {
