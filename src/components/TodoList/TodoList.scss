@@ -41,3 +41,12 @@
   width: clamp(0.75rem, 0.618rem + 0.563vw, 1.125rem);
   height: auto;
 }
+
+.no-completed-message {
+  text-align: center;
+  color: var(--col-dark-grey-blue);
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}

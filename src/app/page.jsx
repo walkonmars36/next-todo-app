@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Header from "@/components/Header/Header";
 import AddTodo from "@/components/AddTodo/AddTodo";
@@ -12,7 +12,7 @@ export default function Home() {
   const [filter, setFilter] = useState("all");
 
   function handleAddTodo(todo) {
-    setTodos([...todos, { text: todo, completed: false }]);
+    setTodos([...todos, { id: Date.now(), text: todo, status: "active" }]);
   }
 
   function handleToggleTodoCompleted(index) {
@@ -21,7 +21,7 @@ export default function Home() {
         if (i === index) {
           return {
             ...todo,
-            completed: !todo.completed,
+            status: todo.status === "active" ? "completed" : "active",
           };
         }
         return todo;
@@ -29,20 +29,28 @@ export default function Home() {
     );
   }
 
-  function handleDeleteTodo(index) {
-    const newTodos = todos.filter((_, i) => i !== index);
-    setTodos(newTodos);
-  }
-
   function handleFilterChange(filter) {
     setFilter(filter);
   }
 
   function handleClearCompleted() {
-    const newTodos = todos.filter((todo) => !todo.completed);
+    const newTodos = todos.map((todo) => {
+      if (todo.status === "completed") {
+        return { ...todo, status: "hidden" };
+      }
+      return todo;
+    });
     setTodos(newTodos);
-    setFilter("all");
   }
+
+  function handleDeleteTodo(id) {
+    const newTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(newTodos);
+  }
+
+  useEffect(() => {
+    console.log("todos", todos);
+  }, [todos]);
 
   return (
     <div className={styles.page}>

@@ -7,14 +7,22 @@
     hsl(280, 87%, 65%)
   );
 
-  /* Light theme */
+  --col-bright-blue: hsl(220, 98%, 61%);
+
+  /* Light Theme */
   --col-v-light-grey: hsl(0, 0%, 98%);
   --col-v-light-grey-blue: hsl(236, 33%, 92%);
   --col-light-grey-blue: hsl(233, 11%, 84%);
   --col-dark-grey-blue: hsl(235, 9%, 61%);
   --col-v-dark-grey-blue: hsl(235, 19%, 35%);
-  --col-bright-blue: hsl(220, 98%, 61%);
 
-  /* fonts colour */
-  --primary-font-col: var(--col-v-dark-grey-blue);
+  /* Dark Theme  */
+
+  --col-v-dk-blue: hsl(235, 21%, 11%);
+  --col-v-dk-des-blue: hsl(235, 24%, 19%);
+  --col-lt-grey-blue: hsl(234, 39%, 85%);
+  --col-hvr-lt-grey-blue: hsl(236, 33%, 92%);
+  --col-dk-grey-blue: hsl(234, 11%, 52%);
+  --col-v-dk-grey-blue-1: hsl(233, 14%, 35%);
+  --col-v-dk-grey-blue-2: hsl(237, 14%, 26%);
 }

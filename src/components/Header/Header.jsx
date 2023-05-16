@@ -1,6 +1,8 @@
 import "./Header.scss";
+import styled from "@emotion/styled";
 import Image from "next/image";
 import IconSun from "/public/assets/images/icon-sun.svg";
+import IconMoon from "/public/assets/images/icon-moon.svg";
 
 const header = () => {
   return (

@@ -1,6 +1,6 @@
 import "./TodoList.scss";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { useState } from "react";
+
 import Image from "next/image";
 import IconCheck from "/public/assets/images/icon-check.svg";
 import IconCross from "/public/assets/images/icon-cross.svg";
@@ -13,25 +13,33 @@ const TodoList = ({
   deleteTodo,
   clearCompleted,
 }) => {
-  const filteredTodos = todos.filter((todo, index) => {
+  const filteredTodos = todos.filter((todo) => {
     if (filter === "all") {
-      return true;
+      return todo.status === "active" || todo.status === "completed";
     } else if (filter === "active") {
-      return !todo.completed;
+      return todo.status === "active";
     } else if (filter === "completed") {
-      return todo.completed;
+      return todo.status === "completed" || todo.status === "hidden";
     }
     return false;
   });
 
-  const activeTodosCount = todos.filter((todo) => !todo.completed).length;
+  const activeTodosCount = todos.filter(
+    (todo) => todo.status === "active"
+  ).length;
+
+  console.log("activeTodosCount", activeTodosCount);
+
+  const completedTodosCount = todos.filter(
+    (todo) => todo.status === "hidden"
+  ).length;
 
   const showFooter =
     (activeTodosCount > 0 && filter === "all") ||
     filter === "active" ||
-    todos.some((todo) => todo.completed);
+    completedTodosCount >= 1;
 
-  const completedTodosCount = todos.filter((todo) => todo.completed).length;
+  console.log("completedTodosCount", completedTodosCount);
 
   function handleDragEnd(result) {
     if (!result.destination) {
@@ -66,32 +74,36 @@ const TodoList = ({
                     <li
                       className={`todos__item ${
                         index === 0 ? "first-item" : ""
-                      } ${todo.completed ? "todos__item--completed" : ""} `}
+                      } ${
+                        todo.status !== "active" ? "todos__item--completed" : ""
+                      } `}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
                       <button
                         className={`btn circle-btn ${
-                          todo.completed ? "gradient" : ""
+                          todo.status !== "active" ? "gradient" : ""
                         }`}
                         onClick={() => {
                           toggleCompleted(index);
                         }}
                       >
-                        <Image src={IconCheck} alt="check item" />
+                        <Image src={IconCheck} alt="check completed item" />
                       </button>
                       {todo.text}
-                      <button
-                        className="btn todos__item-delete"
-                        onClick={() => deleteTodo(index)}
-                      >
-                        <Image
-                          className="icon-cross"
-                          src={IconCross}
-                          alt="delete item"
-                        />
-                      </button>
+                      {todo.status !== "hidden" && (
+                        <button
+                          className="btn todos__item-delete"
+                          onClick={() => deleteTodo(todo.id)}
+                        >
+                          <Image
+                            className="icon-cross"
+                            src={IconCross}
+                            alt="delete item"
+                          />
+                        </button>
+                      )}
                     </li>
                   )}
                 </Draggable>
@@ -103,21 +115,40 @@ const TodoList = ({
                 <li className="todos__item todos__item-footer">
                   {filter !== "completed" && (
                     <span className="todos__item-footer-text">
-                      {activeTodosCount} item(s) left
+                      {activeTodosCount >= 1 ? activeTodosCount : "No"}{" "}
+                      {activeTodosCount === 1 ? "task" : "tasks"} left.
                     </span>
                   )}
+
                   {filter === "completed" && (
                     <span className="todos__item-footer-text">
-                      {completedTodosCount} item(s) completed
+                      {completedTodosCount}{" "}
+                      {completedTodosCount === 1 ? "task" : "tasks"} completed
                     </span>
                   )}
-                  {todos.some((todo) => todo.completed) &&
-                    filter !== "active" && (
+
+                  {todos.some(
+                    (todo) => todo.status === "completed" && filter === "all"
+                  ) && (
+                    <button
+                      onClick={clearCompleted}
+                      className="btn todos__clear-btn todos__item-footer-text"
+                    >
+                      Clear Completed
+                    </button>
+                  )}
+
+                  {todos.some((todo) => todo.status === "hidden") &&
+                    filter === "completed" && (
                       <button
-                        onClick={clearCompleted}
+                        onClick={() =>
+                          todos
+                            .filter((todo) => todo.status === "hidden")
+                            .forEach((todo) => deleteTodo(todo.id))
+                        }
                         className="btn todos__clear-btn todos__item-footer-text"
                       >
-                        Clear Completed
+                        Delete Completed
                       </button>
                     )}
                 </li>
@@ -127,11 +158,12 @@ const TodoList = ({
         </Droppable>
       </DragDropContext>
 
-      {filter === "completed" && !todos.some((todo) => todo.completed) && (
-        <div className="no-completed-message">
-          Nothing completed yet, go and finish one of your tasks!
-        </div>
-      )}
+      {filter === "completed" &&
+        !todos.some((todo) => todo.status === "hidden") && (
+          <div className="no-completed-message">
+            All done here, go and finish another task!
+          </div>
+        )}
     </>
   );
 };

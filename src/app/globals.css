@@ -4,8 +4,19 @@
 
 body {
   background-color: var(--col-v-light-grey);
-  color: var(--primary-font-col);
+  color: var(--col-v-light-grey-blue);
   font-weight: 400;
+  transition: background 0.25s ease-in-out;
+}
+
+body[data-theme="light"] {
+  background-color: var(--col-v-light-grey);
+  color: var(--col-v-dark-grey-blue);
+}
+
+body[data-theme="dark"] {
+  background-color: var(--col-v-dk-blue);
+  color: var(--col-v-light-grey-blue);
 }
 
 button.circle-btn {
