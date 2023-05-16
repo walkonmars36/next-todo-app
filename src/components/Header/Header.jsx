@@ -1,5 +1,8 @@
 import "./Header.scss";
-import ThemeToggle from "../../components/ThemeToggle";
+import dynamic from "next/dynamic";
+const ThemeToggle = dynamic(() => import("../../components/ThemeToggle"), {
+  ssr: false,
+});
 
 const header = () => {
   return (

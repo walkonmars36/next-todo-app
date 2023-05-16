@@ -49,13 +49,8 @@ const ToggleThumb = styled.span`
 `;
 
 const ThemeToggle = () => {
-  const [activeTheme, setActiveTheme] = useState("light");
+  const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
   const inactiveTheme = activeTheme === "light" ? "dark" : "light";
-
-  useEffect(() => {
-    const localTheme = window.localStorage.getItem("theme");
-    localTheme && setActiveTheme(localTheme);
-  }, []);
 
   useEffect(() => {
     document.body.dataset.theme = activeTheme;
