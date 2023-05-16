@@ -9,14 +9,17 @@ body {
   transition: background 0.25s ease-in-out;
 }
 
+body,
 body[data-theme="light"] {
   background-color: var(--col-v-light-grey);
   color: var(--col-v-dark-grey-blue);
+  --color-bg-toggle: #1e90ff;
 }
 
 body[data-theme="dark"] {
   background-color: var(--col-v-dk-blue);
   color: var(--col-v-light-grey-blue);
+  --color-bg-toggle: #a9a9a9;
 }
 
 button.circle-btn {
