@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Josefin_Sans } from "next/font/google";
+import ThemeProvider from "./contexts/ThemeProvider";
 
 const josefin = Josefin_Sans({ subsets: ["latin"] });
 
@@ -11,9 +12,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={josefin.className}>
-        {children}
-      </body>
+      <ThemeProvider>
+        <body suppressHydrationWarning={true} className={josefin.className}>
+          {children}
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

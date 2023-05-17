@@ -3,23 +3,22 @@
 @import "./styles/variables.module.css";
 
 body {
-  background-color: var(--col-v-light-grey);
-  color: var(--col-v-light-grey-blue);
   font-weight: 400;
   transition: background 0.25s ease-in-out;
 }
 
-body,
+:root {
+  --color-bg-toggle: var(--col-v-dark-grey-blue);
+}
+
 body[data-theme="light"] {
   background-color: var(--col-v-light-grey);
   color: var(--col-v-dark-grey-blue);
-  --color-bg-toggle: var(--col-v-dark-grey-blue);
 }
 
 body[data-theme="dark"] {
   background-color: var(--col-v-dk-blue);
   color: var(--col-v-light-grey-blue);
-  --color-bg-toggle: var(--col-v-dark-grey-blue);
 }
 
 button.circle-btn {

@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+"use client";
 
+import { useContext } from "react";
+import ThemeContext from "../contexts/ThemeContext";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import IconSun from "/public/assets/images/icon-sun.svg";
@@ -49,20 +51,15 @@ const ToggleThumb = styled.span`
 `;
 
 const ThemeToggle = () => {
-  const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
+  const { activeTheme, toggleTheme } = useContext(ThemeContext);
   const inactiveTheme = activeTheme === "light" ? "dark" : "light";
-
-  useEffect(() => {
-    document.body.dataset.theme = activeTheme;
-    window.localStorage.setItem("theme", activeTheme);
-  }, [activeTheme]);
 
   return (
     <ToggleButton
       aria-label={`Change to ${inactiveTheme} mode`}
       title={`Change to ${inactiveTheme} mode`}
       type="button"
-      onClick={() => setActiveTheme(inactiveTheme)}
+      onClick={toggleTheme}
     >
       <ToggleThumb activeTheme={activeTheme} />
       <span aria-hidden={true}>

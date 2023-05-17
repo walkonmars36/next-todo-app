@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
-import Header from "@/components/Header/Header";
-import AddTodo from "@/components/AddTodo/AddTodo";
-import TodoList from "@/components/TodoList/TodoList";
-import TodoFilter from "@/components/TodoFilter/TodoFilter";
+import Header from "./components/Header/Header";
+import AddTodo from "./components/AddTodo/AddTodo";
+import TodoList from "./components/TodoList/TodoList";
+import TodoFilter from "./components/TodoFilter/TodoFilter";
 
 export default function Home() {
   const [todos, setTodos] = useState([]);

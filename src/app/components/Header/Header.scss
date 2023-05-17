@@ -1,6 +1,6 @@
 .header {
-  background-image: url("../../../public/assets/images/bg-mobile-light.jpg");
   background-size: cover;
+
   background-repeat: no-repeat;
   min-height: 12.5rem;
   background-position: center;
@@ -16,4 +16,12 @@
     color: #fff;
     letter-spacing: 0.3em;
   }
+}
+
+.header[data-theme="light"] {
+  background-image: url("/assets/images/bg-mobile-light.jpg");
+}
+
+.header[data-theme="dark"] {
+  background-image: url("/assets/images/bg-mobile-dark.jpg");
 }
