@@ -63,6 +63,7 @@ const TodoList = ({
               role="list"
               {...provided.droppableProps}
               ref={provided.innerRef}
+              data-theme={activeTheme}
             >
               {filteredTodos.map((todo, index) => (
                 <Draggable

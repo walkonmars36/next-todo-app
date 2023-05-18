@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./AddTodo.scss";
-import { useContext } from "react";
+
 import ThemeContext from "../../contexts/ThemeContext";
 import Image from "next/image";
 import IconCheck from "/public/assets/images/icon-check.svg";
@@ -30,7 +30,7 @@ const AddTodo = ({ addTodo }) => {
         type="submit"
         onClick={handleAddButtonClicked}
       >
-        <Image src={IconCheck} alt="add item" />
+        <Image src={IconCheck} alt="add item" className="icon-check" />
       </button>
 
       <input

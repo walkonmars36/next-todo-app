@@ -1,5 +1,4 @@
 form {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 0.8em 1em;
   border-radius: 5px;
 }
@@ -21,6 +20,7 @@ input:focus-visible {
 
 form[data-theme="light"] {
   background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
 }
 
 input[data-theme="light"] {
@@ -35,4 +35,9 @@ form[data-theme="dark"] {
 
 input[data-theme="dark"] {
   background-color: var(--col-v-dk-des-blue);
+  color: var(--col-lt-grey-blue);
+}
+
+::placeholder {
+  color: var(--placeholder-color);
 }

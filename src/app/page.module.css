@@ -4,7 +4,7 @@
 
 .mainContent {
   position: absolute;
-  top: 6.8rem;
+  top: clamp(7rem, 5.944rem + 4.507vw, 10rem);
   left: 0;
   right: 0;
 }

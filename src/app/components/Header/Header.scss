@@ -1,11 +1,11 @@
 .header {
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: 12.5rem;
+  min-height: clamp(12.5rem, 10.299rem + 9.39vw, 18.75rem);
   background-position: center;
 
   &__content {
-    padding-top: 3rem;
+    padding-top: clamp(3rem, 2.516rem + 2.066vw, 4.375rem);
     display: flex;
     justify-content: space-between;
     align-items: center;

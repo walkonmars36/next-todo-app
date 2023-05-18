@@ -10,11 +10,13 @@ body {
 body[data-theme="light"] {
   background-color: var(--col-v-light-grey);
   color: var(--col-v-dark-grey-blue);
+  --placeholder-color: var(--col-dark-grey-blue);
 }
 
 body[data-theme="dark"] {
   background-color: var(--col-v-dk-blue);
   color: var(--col-v-light-grey-blue);
+  --placeholder-color: var(--col-hvr-lt-grey-blue);
 }
 
 button.circle-btn {
@@ -25,6 +27,11 @@ button.circle-btn {
   height: 1.25rem;
   border-radius: 50%;
   border: 1px solid hsl(236, 33%, 92%);
+  background-color: transparent;
+}
+
+button.circle-btn:hover {
+  background-color: hsl(280, 87%, 65%);
 }
 
 .gradient {

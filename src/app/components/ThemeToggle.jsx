@@ -8,9 +8,9 @@ import IconSun from "/public/assets/images/icon-sun.svg";
 import IconMoon from "/public/assets/images/icon-moon.svg";
 
 const ToggleButton = styled.button`
-  --toggle-width: 80px;
-  --toggle-height: 38px;
-  --toggle-padding: 4px;
+  --toggle-width: 5rem;
+  --toggle-height: 2.4rem;
+  --toggle-padding: 0.25rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -32,7 +32,7 @@ const ToggleButton = styled.button`
     outline: none;
     }
     &:hover {
-        box-shadow: 0 0 5px 2px var(--color-bg-toggle);
+        box-shadow: 0 0 3px 2px var(--color-bg-toggle);
 `;
 
 const ToggleThumb = styled.span`
