@@ -2,11 +2,21 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 0.8em 1em;
   border-radius: 5px;
-  background-color: #fff;
+
   margin-top: 1rem;
   line-height: 1;
 }
 
 button {
   color: var(--col-dark-grey-blue);
+}
+
+// Light Theme
+.filters[data-theme="light"] {
+  background-color: #fff;
+}
+
+// Dark Theme
+.filters[data-theme="dark"] {
+  background-color: var(--col-v-dk-des-blue);
 }

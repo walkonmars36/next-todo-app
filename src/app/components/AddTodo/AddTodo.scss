@@ -2,7 +2,6 @@ form {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 0.8em 1em;
   border-radius: 5px;
-  background-color: #fff;
 }
 
 input {
@@ -16,4 +15,24 @@ input:focus-visible {
 
 .btn-check {
   align-self: center;
+}
+
+// Light Theme
+
+form[data-theme="light"] {
+  background-color: #fff;
+}
+
+input[data-theme="light"] {
+  background-color: #fff;
+}
+
+// Dark Theme
+
+form[data-theme="dark"] {
+  background-color: var(--col-v-dk-des-blue);
+}
+
+input[data-theme="dark"] {
+  background-color: var(--col-v-dk-des-blue);
 }

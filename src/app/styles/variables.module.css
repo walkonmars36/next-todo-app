@@ -8,6 +8,7 @@
   );
 
   --col-bright-blue: hsl(220, 98%, 61%);
+  --color-bg-toggle: var(--col-v-dark-grey-blue);
 
   /* Light Theme */
   --col-v-light-grey: hsl(0, 0%, 98%);

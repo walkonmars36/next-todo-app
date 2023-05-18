@@ -1,6 +1,8 @@
+"use client";
 import "./TodoList.scss";
+import { useContext } from "react";
+import ThemeContext from "../../contexts/ThemeContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
 import Image from "next/image";
 import IconCheck from "/public/assets/images/icon-check.svg";
 import IconCross from "/public/assets/images/icon-cross.svg";
@@ -13,6 +15,8 @@ const TodoList = ({
   deleteTodo,
   clearCompleted,
 }) => {
+  const { activeTheme } = useContext(ThemeContext);
+
   const filteredTodos = todos.filter((todo) => {
     if (filter === "all") {
       return todo.status === "active" || todo.status === "completed";
@@ -28,8 +32,6 @@ const TodoList = ({
     (todo) => todo.status === "active"
   ).length;
 
-  console.log("activeTodosCount", activeTodosCount);
-
   const completedTodosCount = todos.filter(
     (todo) => todo.status === "hidden"
   ).length;
@@ -38,8 +40,6 @@ const TodoList = ({
     (activeTodosCount > 0 && filter === "all") ||
     filter === "active" ||
     completedTodosCount >= 1;
-
-  console.log("completedTodosCount", completedTodosCount);
 
   function handleDragEnd(result) {
     if (!result.destination) {
@@ -80,6 +80,7 @@ const TodoList = ({
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      data-theme={activeTheme}
                     >
                       <button
                         className={`btn circle-btn ${
@@ -112,7 +113,10 @@ const TodoList = ({
               {provided.placeholder}
 
               {showFooter && (
-                <li className="todos__item todos__item-footer">
+                <li
+                  className="todos__item todos__item-footer"
+                  data-theme={activeTheme}
+                >
                   {filter !== "completed" && (
                     <span className="todos__item-footer-text">
                       {activeTodosCount >= 1 ? activeTodosCount : "No"}{" "}

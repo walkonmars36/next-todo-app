@@ -1,6 +1,5 @@
 .header {
   background-size: cover;
-
   background-repeat: no-repeat;
   min-height: 12.5rem;
   background-position: center;
@@ -24,4 +23,14 @@
 
 .header[data-theme="dark"] {
   background-image: url("/assets/images/bg-mobile-dark.jpg");
+}
+
+@media (min-width: 376px) {
+  .header[data-theme="light"] {
+    background-image: url("/assets/images/bg-desktop-light.jpg");
+  }
+
+  .header[data-theme="dark"] {
+    background-image: url("/assets/images/bg-desktop-dark.jpg");
+  }
 }

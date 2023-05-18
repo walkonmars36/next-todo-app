@@ -7,9 +7,7 @@
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    border-bottom: 1px solid hsl(236, 33%, 92%);
     padding: 1em;
-    background-color: #fff;
 
     &--completed {
       text-decoration: line-through;
@@ -49,4 +47,17 @@
   background-color: #fff;
   border-radius: 5px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+// Light Theme
+
+.todos__item[data-theme="light"] {
+  background-color: #fff;
+  border-bottom: 1px solid var(--col-v-light-grey-blue);
+}
+
+// Dark Theme
+.todos__item[data-theme="dark"] {
+  background-color: var(--col-v-dk-des-blue);
+  border-bottom: 1px solid var(--col-v-dk-grey-blue-2);
 }

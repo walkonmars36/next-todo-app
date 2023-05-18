@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./page.module.css";
 import Header from "./components/Header/Header";
 import AddTodo from "./components/AddTodo/AddTodo";
@@ -47,10 +47,6 @@ export default function Home() {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
   }
-
-  useEffect(() => {
-    console.log("todos", todos);
-  }, [todos]);
 
   return (
     <div className={styles.page}>

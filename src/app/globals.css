@@ -7,10 +7,6 @@ body {
   transition: background 0.25s ease-in-out;
 }
 
-:root {
-  --color-bg-toggle: var(--col-v-dark-grey-blue);
-}
-
 body[data-theme="light"] {
   background-color: var(--col-v-light-grey);
   color: var(--col-v-dark-grey-blue);
